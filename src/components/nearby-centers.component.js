@@ -16,6 +16,32 @@ const styles = {
     }
 }
 
+const locations = [{
+    country: 'Pakistan',
+    city: 'Islamabad',
+    zip: 44220,
+    name: 'Centaurus',
+    address: 'Search Results, F8/4 Jinnah Avenue, F 8/4 F-8, Islamabad, Islamabad Capital Territory 44220',
+    coords: {
+        lat: 33.7077,
+        long: 73.0501
+    }
+}, {
+    name: 'DHA Phase 2',
+    address: 'The Best Address',
+    coords: {
+        lat: 33.5368,
+        long: 73.1645
+    }
+}, {
+    name: 'Bahria 8',
+    address: 'The Best Address',
+    coords: {
+        lat: 33.4786,
+        long: 73.0789
+    }
+}]
+
 const NearbyCentersComponent = (props) => {
 
     let [location, setLocation] = useState({});
@@ -45,10 +71,12 @@ const NearbyCentersComponent = (props) => {
     };
 
     const onInfoWindowOpen = (props, e, position) => {
-        const button = (<button className="btn btn-success w-100" onClick={e => {
+        const button = (<button className="btn btn-light w-100" onClick={e => {
             mapsSelector(position)
-        }}>Open In GMaps</button>);
+        }}><i className="fas fa-map-marker-alt mr-2 t-color"></i>Open In Google Maps</button>);
+        const button2 = (<button onClick={() => window.open('tel:1234567890')} className="btn btn-dark w-100 mt-2">Phone Number</button>);
         ReactDOM.render(React.Children.only(button), document.getElementById("iwc"));
+        ReactDOM.render(React.Children.only(button2), document.getElementById("iwc2"));
     }
 
     const mapsSelector = (position) => {
@@ -80,10 +108,15 @@ const NearbyCentersComponent = (props) => {
                 initialCenter={{ lat: DEF_LAT, lng: DEF_LONG }}
                 center={{ lat: location.latitude, lng: location.longitude }}
             >
-                <Marker onClick={onMarkerClick}
-                    name={'CMH Hospital'}
-                    address={'The best hospital ever in this district'}
-                    position={{ lat: 30.3753, lng: 69.3451 }} />
+
+                {locations.map((loc) => {
+                    console.log(loc)
+                    return (<Marker onClick={onMarkerClick}
+                        name={loc.name}
+                        address={loc.address}
+                        position={{ lat: loc.coords.lat, lng: loc.coords.long }}
+                    />)
+                })}
 
                 <InfoWindow
                     marker={activeMarker}
@@ -102,7 +135,7 @@ const NearbyCentersComponent = (props) => {
                         <div>{selectedPlace.address}</div>
                         <br />
                         <div id="iwc" />
-                        {/* <button className="w-100 btn btn-success" onClick={e => alert(e.target.value)}>Open G Maps</button> */}
+                        <div id="iwc2" />
                     </div>
                 </InfoWindow>
             </Map>

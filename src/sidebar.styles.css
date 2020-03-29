@@ -17,7 +17,11 @@
 }
 
 .is-active{
-    color: #2AF598;
+    color: #2AF598!important;
+}
+
+.is-active-b{
+    color: #ffd78c!important;
 }
 
 .sidebar-font-f:hover {
