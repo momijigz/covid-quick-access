@@ -17,8 +17,8 @@ const styles = {
 }
 
 const locations = [{
-    country: 'Pakistan',
-    city: 'Islamabad',
+    country: 'pk',
+    city: 'islamabad',
     zip: 44220,
     name: 'Centaurus',
     address: 'Search Results, F8/4 Jinnah Avenue, F 8/4 F-8, Islamabad, Islamabad Capital Territory 44220',
@@ -27,6 +27,9 @@ const locations = [{
         long: 73.0501
     }
 }, {
+    country: 'pk',
+    city: 'islamabad',
+    zip: 44220,
     name: 'DHA Phase 2',
     address: 'The Best Address',
     coords: {
@@ -34,6 +37,9 @@ const locations = [{
         long: 73.1645
     }
 }, {
+    country: 'pk',
+    city: 'rawalpindi',
+    zip: 44220,
     name: 'Bahria 8',
     address: 'The Best Address',
     coords: {
@@ -43,6 +49,8 @@ const locations = [{
 }]
 
 const NearbyCentersComponent = (props) => {
+
+    console.log(props);
 
     let [location, setLocation] = useState({});
     let [showingInfoWindow, setShowingInfoWindow] = useState(false);
@@ -55,6 +63,11 @@ const NearbyCentersComponent = (props) => {
             lng: 0
         }
     });
+    let [selectedArea, setSelectedArea] = useState({
+        city: '',
+        country: ''
+    })
+
 
     const onMarkerClick = (props, marker, e) => {
         setSelectedPlace(selectedPlace = props);
@@ -88,29 +101,24 @@ const NearbyCentersComponent = (props) => {
     }
 
     useEffect(() => {
-        (window.navigator.geolocation.getCurrentPosition((data) => {
-            setLocation(location = {
-                latitude: data.coords.latitude,
-                longitude: data.coords.longitude
-            })
-        }, (error) => {
-            console.log(error)
-        }))
+        if (localStorage.getItem('area')) {
+            setSelectedArea(selectedArea = JSON.parse(localStorage.getItem('area')));
+            console.log(selectedArea);
+        }
+
     }, [])
 
     return (
         <Fragment>
             <Map
-                google={window.google}
+                google={props.google}
                 zoom={10}
                 style={mapStyles}
                 onClick={onMapClicked}
                 initialCenter={{ lat: DEF_LAT, lng: DEF_LONG }}
-                center={{ lat: location.latitude, lng: location.longitude }}
             >
 
-                {locations.map((loc) => {
-                    console.log(loc)
+                {locations.filter((loc) => loc.country === selectedArea.country && loc.city === selectedArea.city).map((loc) => {
                     return (<Marker onClick={onMarkerClick}
                         name={loc.name}
                         address={loc.address}

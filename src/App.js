@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Sidebar from "react-sidebar";
 import './sidebar.styles.css';
@@ -17,7 +17,13 @@ import SettingsComponent from './components/settings.component';
 
 function App() {
 
+
+
   let [sidebarStatus, setSidebarStatus] = useState({ sidebarOpen: false });
+  let [selectedArea, setSelectedArea] = useState({
+    city: '',
+    country: ''
+  })
 
   function onSetSidebarOpen(open) {
     setSidebarStatus(sidebarStatus = { sidebarOpen: open });
@@ -27,15 +33,15 @@ function App() {
     return (
       <div className="sidebar-container">
         <div className="container p-4 bg-light sidebar-cont text-center">
-        <i style={{fontSize: '5em'}} className="fas fa-map-marked-alt sidebar-icon"></i>
+          <i style={{ fontSize: '5em' }} className="fas fa-map-marked-alt sidebar-icon"></i>
         </div>
         <div className="pl-5 pr-5 pt-3">
-        <NavLink activeClassName='is-active-b' className="btn btn-danger t-font font-weight-bold w-100" to="/panic">PANIC</NavLink>
+          <NavLink activeClassName='is-active-b' className="btn btn-danger t-font font-weight-bold w-100" to="/panic">PANIC</NavLink>
         </div>
         <hr className="sidebar-divider" />
         <div className="pl-5 pr-5">
           <NavLink activeClassName='is-active' className="sidebar-font" to="/nearby">
-          <i className="fas fa-map-marked-alt sidebar-icon"></i>
+            <i className="fas fa-map-marked-alt sidebar-icon"></i>
             <span className="ml-3"><b>HELP NEARBY</b></span>
           </NavLink>
         </div>
