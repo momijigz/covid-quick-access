@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import cities from '../testDB/cities';
+import countries from '../testDB/countries';
+
 
 const SettingsComponent = () => {
 
@@ -10,59 +13,6 @@ const SettingsComponent = () => {
         }
     }, [])
 
-    const countries = [{
-        id: '0',
-        name: 'Select Country',
-        value: 'sc'
-    }, {
-        id: '1',
-        name: 'Pakistan',
-        value: 'pk'
-    },
-    {
-        id: '2',
-        name: 'Turkey',
-        value: 'turkey',
-        value: 'tr'
-    }]
-
-    const cities = [,
-        {
-            id: '1',
-            name: 'Islamabad',
-            value: 'islamabad',
-            zip: 46000,
-            countryAbbr: 'pk',
-            latitude: 33.6844,
-            longitude: 73.0479
-        },
-        {
-            id: '2',
-            name: 'Rawalpindi',
-            value: 'rawalpindi',
-            zip: 46000,
-            countryAbbr: 'pk',
-            latitude: 33.5651,
-            longitude: 73.0169
-        },
-        {
-            id: '3',
-            name: 'Lahore',
-            value: 'lahore',
-            zip: 44000,
-            countryAbbr: 'pk',
-            latitude: 31.5204,
-            longitude: 74.3587
-        },
-        {
-            id: '4',
-            name: 'Istanbul',
-            value: 'istanbul',
-            zip: 44000,
-            countryAbbr: 'tr',
-            latitude: 31.5204,
-            longitude: 74.3587
-        }]
 
     let [isCountrySelected, setIsCountrySelected] = useState(true);
     let [selectedCountry, setSelectedCountry] = useState('');

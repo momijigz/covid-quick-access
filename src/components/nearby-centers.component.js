@@ -17,6 +17,7 @@ const styles = {
 }
 
 const locations = [{
+    id: 1,
     country: 'pk',
     city: 'islamabad',
     zip: 44220,
@@ -27,6 +28,7 @@ const locations = [{
         long: 73.0501
     }
 }, {
+    id: 2,
     country: 'pk',
     city: 'islamabad',
     zip: 44220,
@@ -37,6 +39,7 @@ const locations = [{
         long: 73.1645
     }
 }, {
+    id: 3,
     country: 'pk',
     city: 'rawalpindi',
     zip: 44220,
@@ -119,7 +122,7 @@ const NearbyCentersComponent = (props) => {
             >
 
                 {locations.filter((loc) => loc.country === selectedArea.country && loc.city === selectedArea.city).map((loc) => {
-                    return (<Marker onClick={onMarkerClick}
+                    return (<Marker key={loc.id} onClick={onMarkerClick}
                         name={loc.name}
                         address={loc.address}
                         position={{ lat: loc.coords.lat, lng: loc.coords.long }}
